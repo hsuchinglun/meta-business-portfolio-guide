@@ -52,7 +52,10 @@ assert.equal(window.location.hash, '#11');
 assert.match(body(), /確認或建立廣告帳號/);
 
 await go(13);
+const slideFrame = window.document.querySelector('.slide-frame');
+slideFrame.scrollTop = 150;
 await clickButton('第 7 頁 盤點組合');
+assert.equal(slideFrame.scrollTop, 0);
 assert.equal(window.location.hash, '#7');
 assert.match(body(), /盤點現有商家組合/);
 assert.equal(window.document.querySelector('.progress-track [aria-current="page"]').getAttribute('aria-label'), '第 7 頁 盤點組合');

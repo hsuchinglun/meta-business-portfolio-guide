@@ -453,6 +453,7 @@ html, body { height: 100%; overflow: hidden; }
 .issue-buttons button { min-height: 35px; padding: 5px 7px; font-size: 13px; font-weight: 650; line-height: 1.35; text-align: left; color: var(--ink); background: #f7faff; border: 1px solid var(--line); border-radius: 7px; }
 .issue-buttons button:hover { background: #eaf3ff; }
 .issue-buttons button[aria-pressed='true'] { color: var(--blue-dark); background: #e1efff; border-color: #8ab8f1; }
+.slide .return-to-issues { display: none; }
 .slide[data-page='15'] .demo { padding: 10px; background: transparent; border: 0; }
 .slide[data-page='15'] .diagnosis { padding: 11px; }
 .slide[data-page='15'] .diagnosis ol { gap: 6px; }
@@ -584,9 +585,63 @@ html, body { height: 100%; overflow: hidden; }
   .learning-layout { order: 2; grid-template-columns: minmax(0, 1fr); }
   .side-directory { display: none; }
   .deck { align-items: start; }
-  .slide-frame > .slide {
-    inset-block-start: 0;
-    transform: translateX(-50%) scale(var(--slide-scale, 1));
-    transform-origin: center top;
+  .slide-frame {
+    height: 100%;
+    overflow: hidden auto;
+    overscroll-behavior-y: contain;
   }
+  .slide-frame > .slide {
+    --title-size: clamp(21px, 5.4vw, 27px);
+    --section-size: clamp(19px, 5vw, 22px);
+    --body-size: clamp(16px, 4.35vw, 18px);
+    --small-size: clamp(14px, 3.85vw, 16px);
+    position: static;
+    width: 100%;
+    min-height: 100%;
+    padding: clamp(14px, 3.5vw, 24px);
+    transform: none;
+    line-height: 1.45;
+  }
+  .slide .instruction-list h2, .slide .fact h2, .slide h3 { font-size: 19px; }
+  .slide .lesson-lead, .slide .instruction-list p, .slide .lesson-before,
+  .slide .fact p, .slide .role-card p, .slide .checklist label,
+  .slide .takeaway, .slide .scenario-card li p { line-height: 1.45; }
+  .slide .click-hint, .slide .voice, .slide .diagnosis li p { font-size: var(--body-size); line-height: 1.45; }
+  .slide .issue-buttons button, .slide .lesson-side .role-card .switcher button,
+  .slide .lesson-side .flow-node .status, .slide .draft-path,
+  .slide .evidence-rows > div { font-size: var(--small-size); }
+  .slide .lesson-workspace .path, .slide .path strong { font-size: 16px; }
+  .slide .lesson-workspace .inline-source, .slide .inventory-list li > span { font-size: var(--small-size); }
+  .slide .story-boards { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .slide .access-board { gap: 7px; padding: 12px; }
+  .slide .access-board p { font-size: var(--body-size); }
+  .slide .map-layout { grid-template-columns: minmax(0, 1fr); gap: 15px; padding: 0; border: 0; }
+  .slide .map { padding: 12px; border-radius: 12px; }
+  .slide .map-assets { gap: 6px; }
+  .slide .map-assets .map-node { min-height: 62px; padding: 7px 2px; white-space: nowrap; font-size: clamp(12px, 3.5vw, 16px); }
+  .slide .map-detail { gap: 5px; }
+  .slide .map-detail .icon-tile { display: none; }
+  .slide[data-page='15'] .diagnosis-layout, .slide .review-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .slide[data-page='15'] .demo { padding: 0; }
+  .slide[data-page='15'] .diagnosis { padding: 14px; }
+  .slide[data-page='15'] .diagnosis li { padding: 10px; }
+  .slide .issue-picker, .slide .diagnosis { scroll-margin-top: 12px; }
+  .slide .issue-buttons { gap: 8px; }
+  .slide .issue-buttons button { min-height: 44px; padding: 7px 9px; }
+  .slide .return-to-issues { display: inline-flex; margin-top: 4px; padding-inline: 0; font-size: var(--small-size); }
+  .slide .checklist label { padding-block: 10px; }
+  .slide .checklist input { width: 20px; height: 20px; }
+  .controlbar .pager-button { font-size: 15px; }
+  .controlbar .progress-caption { font-size: 13px; }
+}
+
+@media (max-width: 540px) {
+  .slide .lesson-workspace, .slide .lesson-workspace.with-demo,
+  .slide .lesson-workspace:not(.with-demo), .slide .lesson-start,
+  .slide .scenario-grid, .slide .review-grid, .slide .map-layout,
+  .slide[data-page='15'] .diagnosis-layout, .slide .scenario-conditions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .slide .scenario-conditions h2 { grid-column: auto; }
+  .slide .access-board .status { font-size: 13px; }
 }

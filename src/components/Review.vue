@@ -1,30 +1,46 @@
 <script setup>
-import { shallowRef } from 'vue';
+import { nextTick, ref, shallowRef } from 'vue';
 import { checklist, issues } from '../data.js';
 import Icon from './Icon.vue';
 
 const props = defineProps({ page: { type: Number, required: true } });
 const checked = defineModel('checked', { type: Array, required: true });
 const selected = shallowRef(issues[0]);
+const issuePicker = ref(null);
+const diagnosis = ref(null);
+
+async function selectIssue(issue) {
+  selected.value = issue;
+  if (!window.matchMedia('(max-width: 760px)').matches) return;
+  await nextTick();
+  diagnosis.value?.focus({ preventScroll: true });
+  diagnosis.value?.scrollIntoView({ block: 'start' });
+}
+
+function returnToIssues() {
+  issuePicker.value?.querySelector('[aria-pressed="true"]')?.focus({ preventScroll: true });
+  issuePicker.value?.scrollIntoView({ block: 'start' });
+}
 </script>
 
 <template>
   <template v-if="props.page === 14">
     <div class="surface demo">
       <div class="diagnosis-layout">
-        <div class="issue-picker">
+        <div ref="issuePicker" class="issue-picker">
           <p class="click-hint">點一個問題，查看排查方式。</p>
           <div class="issue-buttons" role="group" aria-label="常見問題">
-            <button v-for="issue in issues" :key="issue.title" type="button" :aria-pressed="selected === issue" @click="selected = issue">{{ issue.title }}</button>
+            <button v-for="issue in issues" :key="issue.title" type="button" :aria-pressed="selected === issue" @click="selectIssue(issue)">{{ issue.title }}</button>
           </div>
         </div>
-        <div class="diagnosis" aria-live="polite">
+        <div ref="diagnosis" class="diagnosis" tabindex="-1" aria-live="polite">
           <h3>{{ selected.title }}</h3>
           <ol>
             <li><Icon name="warning" /><div><strong>可能原因</strong><p>{{ selected.cause }}</p></div></li>
             <li><Icon name="search" /><div><strong>檢查位置</strong><p>{{ selected.check }}</p></div></li>
             <li><Icon name="check" /><div><strong>處理方式</strong><p>{{ selected.fix }}</p></div></li>
           </ol>
+          <button class="button quiet return-to-issues" type="button" @click="returnToIssues">回到問題列表</button>
         </div>
       </div>
     </div>

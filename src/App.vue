@@ -43,10 +43,12 @@ watch(page, (number) => {
 
 async function go(number, moveFocus = true) {
   const next = clamp(number);
-  if (next === page.value) return;
-  page.value = next;
-  if (pageFromUrl() !== next) window.location.hash = String(next + 1);
-  await nextTick();
+  if (next !== page.value) {
+    page.value = next;
+    if (pageFromUrl() !== next) window.location.hash = String(next + 1);
+    await nextTick();
+  }
+  if (slideFrame.value) slideFrame.value.scrollTop = 0;
   if (moveFocus) heading.value?.focus({ preventScroll: true });
 }
 
