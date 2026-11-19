@@ -582,4 +582,10 @@ html, body { height: 100%; overflow: hidden; }
 @media (max-width: 760px) {
   .learning-layout { grid-template-columns: minmax(0, 1fr); }
   .side-directory { display: none; }
+  .deck { align-items: start; }
+  .slide-frame > .slide {
+    inset-block-start: 0;
+    transform: translateX(-50%) scale(var(--slide-scale, 1));
+    transform-origin: center top;
+  }
 }
