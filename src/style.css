@@ -580,7 +580,8 @@ html, body { height: 100%; overflow: hidden; }
 }
 
 @media (max-width: 760px) {
-  .learning-layout { grid-template-columns: minmax(0, 1fr); }
+  .controlbar { order: 1; border-top: 0; border-bottom: 1px solid var(--line); }
+  .learning-layout { order: 2; grid-template-columns: minmax(0, 1fr); }
   .side-directory { display: none; }
   .deck { align-items: start; }
   .slide-frame > .slide {
