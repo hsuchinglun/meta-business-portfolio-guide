@@ -1,0 +1,132 @@
+export const sources = [
+  { label: 'Meta｜商家資產與權限概覽', url: 'https://developers.facebook.com/docs/business-management-apis/business-asset-management/overview/', note: '資產歸屬、人員及廣告帳號權限' },
+  { label: 'Meta｜Instagram 商家資產', url: 'https://developers.facebook.com/docs/business-management-apis/business-asset-management/guides/instagram-accounts', note: 'IG 加入商家組合與工作權限' },
+  { label: 'Meta｜Threads 商家設定更新', url: 'https://about.fb.com/br/news/2026/01/anuncios-no-threads-um-ano-depois-agora-alcancando-todos-os-usuarios-e-mercados-globalmente/', note: '2026 年 1 月公告：Threads 可於 Business Settings 管理' },
+  { label: 'Meta｜建立商家組合示例', url: 'https://developers.facebook.com/docs/threat-exchange/getting-access/', note: '官方範例含建立入口與基本資料；此頁以特定產品為背景' },
+  { label: 'Meta｜Business Manager API 起步', url: 'https://developers.facebook.com/docs/business-management-apis/business-manager/get-started', note: '舊版 API 文件；粉專條件不能推定為所有新版介面必備' },
+  { label: 'Meta｜廣告帳號資產與權限', url: 'https://developers.facebook.com/docs/business-management-apis/business-asset-management/guides/ad-accounts/', note: '新增廣告帳號、歸屬與人員權限' },
+];
+
+export const chapters = [
+  { name: '開始前', range: [0, 5] },
+  { name: '實際設定', range: [6, 13] },
+  { name: '排查與驗收', range: [14, 15] },
+];
+
+export const slides = [
+  { title: '建立與管理 Meta 商家資產', short: '開始前準備' },
+  { title: '查出品牌 IG 在哪個商家組合', short: '找到品牌 IG' },
+  { title: '依這個順序排查存取問題', short: '排查順序' },
+  { title: '看懂登入身分與資產的關係', short: '帳號關係圖' },
+  { title: '用一張表記下資產和權限', short: '資產盤點範例' },
+  { title: '依使用目的準備帳號', short: '必要與建議' },
+  { title: '盤點現有商家組合', short: '盤點組合' },
+  { title: '準備管理者與社群帳號', short: '準備帳號' },
+  { title: '建立商家資產管理組合', short: '建立組合' },
+  { title: '連結 Instagram 與 Threads', short: '連結社群帳號' },
+  { title: '確認或建立廣告帳號', short: '設定廣告帳號' },
+  { title: '邀請同事並指派資產權限', short: '邀請與授權' },
+  { title: '檢查安全、付款及驗證要求', short: '安全與付款' },
+  { title: '用草稿測試廣告身分與版位', short: '廣告草稿測試' },
+  { title: '排查常見設定問題', short: '常見問題排查' },
+  { title: '驗收設定並準備交接', short: '設定驗收' },
+];
+
+export const setup = {
+  6: {
+    why: '既有組合可能已持有 IG 或廣告帳號。重建只會讓資產分散。',
+    path: '商家設定 → 商家選擇器',
+    steps: ['核對目前登入的個人身分。', '逐一查看可選的商家組合與 Business ID。', '記下每個組合的 IG、Threads、廣告帳號及人員。', '確認誰擁有資產、誰只有操作權；決定沿用或新建。'],
+    done: '有一張資產清單：每個組合的 Business ID、資產、擁有者和管理者都寫清楚。',
+    pitfall: '只看見一個組合就認定沒有其他組合；先用相關管理者身分交叉核對。',
+    link: 'https://business.facebook.com/settings',
+    source: 0,
+  },
+  7: {
+    why: '管理者需要獨立可辨識的登入身分；社群帳號也要能完成授權。',
+    path: 'Facebook／Meta 帳號 → 帳號管理中心；Instagram App → 帳號類型',
+    steps: ['準備可正常使用的真實個人 Facebook 身分；符合資格的企業也可能使用受管理的 Meta 帳號。', '確認有效 Email，並替每位管理者啟用雙重驗證。', '登入品牌 IG，檢查是否為專業帳號；商業類型通常較適合品牌管理。', '確認 Threads 能登入，整理品牌正式聯絡 Email。'],
+    done: '每位管理者可獨立登入且完成雙重驗證；IG、Threads 和正式 Email 均可使用。',
+    pitfall: '用品牌名稱註冊假個人帳號，或多人共用帳密及驗證碼。',
+    link: 'https://www.facebook.com/',
+    source: 3,
+  },
+  8: {
+    why: '商家組合是統一管理品牌資產與人員的中心。只在盤點確認沒有適合的既有組合後建立。',
+    path: 'Meta Business Suite → 商家選擇器 → 建立商家組合',
+    steps: ['用預定管理者身分登入 Meta Business Suite。', '在商家選擇器尋找「建立商家資產管理組合」或同義入口。', '填入商家名稱、管理者資料與正式商家 Email。', '提交並確認 Email；回商家設定核對名稱和 Business ID。'],
+    done: '能在商家選擇器切換至新組合，且查得到正確的商家名稱與 Business ID。',
+    pitfall: '選錯登入身分或重複建立。新帳號的建立資格也可能受限制，依畫面提示處理。',
+    link: 'https://business.facebook.com/',
+    source: 3,
+  },
+  9: {
+    why: '社群資產要在正確的商家組合中，才能檢查歸屬與指派工作權限。',
+    path: '商家設定 → 帳號 → Instagram 帳號／Threads 帳號',
+    steps: ['先確認商家選擇器顯示正確的組合。', '在 Instagram 帳號選擇新增／連結，完成 IG 登入與安全授權。', '確認 IG 顯示在預定組合，並查看人員的內容或廣告權限。', '若介面提供 Threads 帳號入口，再按畫面完成加入、關聯及權限檢查。'],
+    done: 'IG 顯示於正確組合且可查看指派人員；Threads 的實際可用入口與權限也已核對。',
+    pitfall: 'IG 已屬其他組合時反覆新增；IG 加入後也別假設 Threads 自動同步完成。',
+    link: 'https://business.facebook.com/settings',
+    source: 1,
+  },
+  10: {
+    why: '商家組合管理資產；廣告帳號承載活動、預算與計費。兩者職責不同。',
+    path: '商家設定 → 帳號 → 廣告帳號',
+    steps: ['先查看是否已有可用廣告帳號，以及它所屬的組合。', '如需新建，選擇新增並建立新的廣告帳號。', '填寫用途清楚的帳號名稱；送出前確認時區、幣別、所屬商家。', '建立後檢查人員權限與是否受限制。'],
+    done: '有一個可用的正確廣告帳號；其 Business ID／廣告帳號編號、時區、幣別和權限均已核對。',
+    pitfall: '幣別、時區或所屬組合填錯後才發現；先確認再提交。',
+    link: 'https://business.facebook.com/settings',
+    source: 5,
+  },
+  11: {
+    why: '個別授權讓操作有責任歸屬，也能在交接時調整或撤銷存取。',
+    path: '商家設定 → 用戶／人員 → 邀請人員',
+    steps: ['在商家設定開啟「人員」。', '填同事的 Email，選擇完整控制權或部分存取。', '指派所需的 IG、Threads 或廣告帳號與任務。', '請同事接受邀請，再回人員頁查狀態。'],
+    done: '已有備援；同事以自己的身分能操作所需資產。',
+    pitfall: '邀請後要指派資產，各角色只給所需權限。',
+    link: 'https://business.facebook.com/settings',
+    source: 1,
+  },
+  12: {
+    why: '可登入不代表可安全投放；付款與帳號狀態仍可能阻擋廣告。',
+    path: '商家設定 → 安全中心；帳單與付款',
+    steps: ['每位管理者啟用雙重驗證，設定可信任的備援管理者。', '在正確廣告帳號新增有效付款方式，核對帳單資料。', '查看廣告帳號是否有限制或待處理通知。', '到安全中心查看是否要求商家驗證；依實際功能與提示準備資料。'],
+    done: '管理者有雙重驗證及備援；付款方式可用；限制與驗證要求已確認。',
+    pitfall: '把企業驗證當成所有新商家都必做，或只測登入、不查付款和限制。',
+    link: 'https://business.facebook.com/settings/security',
+    source: 0,
+  },
+  13: {
+    why: '設定齊全，仍可能在廣告身分或版位選擇時出現問題；草稿可先驗證。',
+    path: '廣告管理員 → 選擇廣告帳號 → 建立草稿',
+    steps: ['在預定的廣告帳號建立測試草稿。', '選擇廣告目標，再到廣告組合查看版位。', '在廣告層級查看身分與素材。', '查看付款、權限、審核或關聯提示。'],
+    done: '已核對帳號、身分與版位，並保存草稿。',
+    pitfall: '仍需在草稿核對 Threads 版位。它會依目標、資格及投放設定變動。',
+    link: 'https://adsmanager.facebook.com/',
+    source: 2,
+  },
+};
+
+export const issues = [
+  { title: '看見不同的商家組合', cause: '登入身分或商家存取權不同。', check: '核對登入身分、組合名稱與 Business ID。', fix: '找到預定組合，由有權限的人新增正確的個別存取。' },
+  { title: 'IG 無法加入組合', cause: 'IG 可能已屬其他組合，或你無權處理。', check: '查 IG 目前擁有者與商家組合。', fix: '先釐清歸屬並取得授權，避免再建新組合。' },
+  { title: '同事看不到 IG', cause: '有商家層級存取，卻沒有 IG 資產任務權限。', check: '到 IG 資產查看已指派人員與任務。', fix: '依工作內容補上內容、訊息、廣告等必要權限。' },
+  { title: '廣告中選不到品牌 IG', cause: 'IG 廣告權限或廣告帳號關聯不完整。', check: '檢查 IG 擁有組合、ADVERTISE 任務與廣告帳號。', fix: '由管理者補齊對應資產的廣告權限。' },
+  { title: 'Threads 版位沒出現', cause: '目標、版位設定、素材或帳號資格可能不符。', check: '換適用目標並查看廣告管理員的可用版位與提示。', fix: '依實際提示調整；不要直接重建帳號。' },
+  { title: '廣告無法投放', cause: '付款、帳號限制、審核或權限異常。', check: '查看帳單、帳號品質與廣告管理員提示。', fix: '依出現的問題逐項處理，再用草稿複測。' },
+  { title: '同事收不到驗證碼', cause: '共用帳號或驗證綁在其他人的裝置。', check: '確認每人是否有自己的登入與雙重驗證。', fix: '改用個別邀請，不共用密碼與驗證碼。' },
+  { title: '多個廣告帳號搞混', cause: '沒有記錄各帳號編號與用途。', check: '列出每個帳號所屬組合、時區、幣別、付款方式。', fix: '指定主要帳號並清楚交接；避免再建立一個。' },
+  { title: '粉專與 IG 的連結', cause: '不同廣告類型與整合功能要求不同。', check: '先看要使用的廣告身分與功能提示。', fix: '依實際需要建立或連結粉專，不把它當作一律必備。' },
+  { title: '原管理者要離職', cause: '沒有備援完整控制權與交接安排。', check: '確認新管理者已接受邀請且可操作。', fix: '先完成移交，再調整或撤銷離職者權限。' },
+];
+
+export const checklist = [
+  '已盤點既有商家組合並記錄 Business ID',
+  '已確認品牌 IG 的擁有組合與操作權限',
+  '已確認 Threads 管理入口與可用權限',
+  '已確認廣告帳號所屬組合、時區與幣別',
+  '已有至少一位可信任的備援管理者',
+  '每位管理者使用獨立身分並啟用雙重驗證',
+  '已核對付款方式、帳號限制與驗證提示',
+  '已用廣告草稿檢查身分及可用版位',
+];
